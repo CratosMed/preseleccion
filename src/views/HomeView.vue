@@ -5,40 +5,49 @@
       <div class="bg-white text-dark col-12 text-center py-3">
         <h5 class="m-0"> <img src="@/assets/logo.png" class="logo1" alt="Logo"> Universidad Nacional Experimental
           Simón
-          Rodríguez-UNESR. Núcleo "Valles del Tuy" <br /> <strong>Bienvenidos al Sistema de Preselección de
-            Cursos</strong></h5>
+          Rodríguez-UNESR. Núcleo "Valles del Tuy" <br /> </h5>
       </div>
     </div>
-
-    <!-- Formulario de inicio de sesión -->
-    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-12 mt-3 container fade-in-down">
-      <div class="home">
-        <div class="wrapper">
-          <div id="formContent">
-            <!-- Icono -->
-            <div class="fadeIn first">
-              <img src="@/assets/logo5.png" class="logo" alt="Logo">
-            </div>
-            <br />
-
-            <!-- Formulario de inicio de sesión -->
-            <form v-on:submit.prevent="login">
-              <input type="text" id="login" class="fadeIn second form-control mb-3" name="login" placeholder="Usuario"
-                v-model="usuario">
-              <input type="password" id="clave" class="fadeIn third form-control mb-3" name="password"
-                placeholder="Contraseña" v-model="clave">
-              <div class="text-center">
-                <input type="submit" class="fadeIn fourth btn btn-primary" value="Inicio">
+    <div class="row">
+      <!-- Formulario de inicio de sesión -->
+      <div class="col-lg-2"></div>
+      <div class="col-lg-4 col-md-4 container mt-5 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight margen" style="color: hsl(218, 81%, 95%)">
+          Bienvenidos a <span class="texto" style="color: hsl(218, 81%, 75%)"> Presélek</span> el Sistema de
+          Preselección
+          de
+          Cursos <br />
+        </h1>
+        <div class="top d-none d-lg-block">
+        </div>
+      </div>
+      <div class="col-lg-6  col-md-8 mt-4  col-sm-10 container  fade-in-down">
+        <div class="home">
+          <div class="wrapper">
+            <div id="formContent">
+              <!-- Icono -->
+              <div class="fadeIn first">
+                <img src="@/assets/logo5.png" class="logo" alt="Logo">
               </div>
-            </form>
-
-            <!-- Enlace para cambiar la clave -->
-            <p @click="recuperarclave" class="mt-3" style="text-decoration: underline; cursor: pointer;">Cambiar Clave
-            </p>
-
-            <!-- Mensaje de error -->
-            <div class="alert alert-danger mt-3" role="alert" v-if="error">
-              {{ error_msg }}
+              <br />
+              <!-- Formulario de inicio de sesión -->
+              <form v-on:submit.prevent="login">
+                <input type="text" id="login" class="fadeIn second form-control mb-3" name="login" placeholder="Usuario"
+                  v-model="usuario">
+                <input type="password" id="clave" class="fadeIn third form-control mb-3" name="password"
+                  placeholder="Contraseña" v-model="clave">
+                <div class="text-center">
+                  <!-- Cambio de color del botón de inicio -->
+                  <input type="submit" class="fadeIn fourth btn btn-primary custom-btn" value="Inicio">
+                </div>
+              </form>
+              <!-- Enlace para cambiar la clave -->
+              <p @click="recuperarclave" class="mt-3" style="text-decoration: underline; cursor: pointer;">Cambiar Clave
+              </p>
+              <!-- Mensaje de error -->
+              <div class="alert alert-danger mt-3" role="alert" v-if="error">
+                {{ error_msg }}
+              </div>
             </div>
           </div>
         </div>
@@ -134,7 +143,6 @@ export default {
   height: auto;
 }
 
-
 .wrapper {
   padding: 20px;
 }
@@ -147,6 +155,15 @@ export default {
   margin: auto;
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
+}
+
+/* Estilo personalizado para el botón de inicio */
+.custom-btn {
+  background-color: #41B4D3;
+}
+
+.custom-btn:hover {
+  background-color: hsl(218, 41%, 15%);
 }
 
 /* Animación de fade */
