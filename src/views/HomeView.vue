@@ -8,20 +8,21 @@
           Rodríguez-UNESR. Núcleo "Valles del Tuy" <br /> </h5>
       </div>
     </div>
-    <div class="row">
+    <div class="row top">
       <!-- Formulario de inicio de sesión -->
-      <div class="col-lg-2"></div>
-      <div class="col-lg-4 col-md-4 container mt-5 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight margen" style="color: hsl(218, 81%, 95%)">
-          Bienvenidos a <span class="texto" style="color: hsl(218, 81%, 75%)"> Presélek</span> el Sistema de
+      <div class="col-1"></div>
+      <div class="col-lg-5 col-md-4  align-content-center" style="z-index: 10">
+
+        <h1 class=" display-5 fw-bold ls-tight  mt-2" style="color: hsl(218, 81%, 95%)">
+          Bienvenidos a <span class="texto " style="color: hsl(218, 81%, 75%)"> Presélek</span> el Sistema
+          de
           Preselección
           de
           Cursos <br />
         </h1>
-        <div class="top d-none d-lg-block">
-        </div>
+
       </div>
-      <div class="col-lg-6  col-md-8 mt-4  col-sm-10 container  fade-in-down">
+      <div class="col-lg-6 col-md-7 col-sm-10 fade-in-down ">
         <div class="home">
           <div class="wrapper">
             <div id="formContent">
@@ -131,6 +132,8 @@ export default {
   /* Elimina el desplazamiento hacia arriba */
 }
 
+
+
 .logo1 {
   max-width: 100%;
   width: 93.5px;
@@ -152,7 +155,8 @@ export default {
   border-radius: 10px;
   padding: 30px;
   max-width: 450px;
-  margin: auto;
+  margin: 10px;
+  margin-top: 0%;
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
 }
@@ -184,5 +188,13 @@ export default {
   #formContent {
     padding: 20px;
   }
+}
+
+.top {
+
+
+  align-items: center;
+  justify-content: center;
+  height: 720px;
 }
 </style>
