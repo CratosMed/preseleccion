@@ -60,9 +60,18 @@
                         </div>
                         <div class="col-sm-12 col-md-12 col-xl-4">
                             <div class="form-group left">
-                                <div class="form-floating ">
-                                    <input type="text" class="form-control" :disabled=this.form.editar name="carrera"
-                                        id="carrera" v-model="form.carrera" placeholder="Carrera">
+                                <div class="form-floating">
+                                    <select class="form-control" :disabled="form.editar" name="carrera" id="carrera"
+                                        v-model="form.carrera">
+                                        <option value="Educación Inicial">Administración Mención RRHH</option>
+                                        <option value="Educación Integral">Administración Mención RMF</option>
+                                        <option value="Administración de Recursos Humanos">Administración Mención
+                                            Informatica</option>
+                                        <option value="Administración de Informática y Recursos Humanos">Administración
+                                            Mención Mercadeo </option>
+                                        <option value="Educación Inicial">Educación Integra</option>
+                                        <option value="Educación Inicial">Educación Inicial</option>
+                                    </select>
                                     <label for="carrera">Carrera:</label>
                                 </div>
                             </div>
@@ -81,17 +90,21 @@
                         <div class="col-sm-12 col-md-6 col-xl-4">
                             <div class="form-group left">
                                 <div class="form-floating ">
-                                    <input type="text" class="form-control" :disabled=this.form.editar name="u_c_acumuladas"
-                                        id="u_c_acumuladas" v-model="form.u_c_acumuladas" placeholder="U/C">
+                                    <input type="text" class="form-control" :disabled=this.form.editar
+                                        name="u_c_acumuladas" id="u_c_acumuladas" v-model="form.u_c_acumuladas"
+                                        placeholder="U/C">
                                     <label for="u_c_acumuladas">Unidad de crédito acumulada:</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-xl-4">
+                        <div class="col-sm-12 col-md-12 col-xl-4">
                             <div class="form-group left">
-                                <div class="form-floating ">
-                                    <input type="text" class="form-control" :disabled=this.form.editar name="sexo" id="sexo"
-                                        v-model="form.sexo" placeholder="Género">
+                                <div class="form-floating">
+                                    <select class="form-control" :disabled="form.editar" name="sexo" id="sexo"
+                                        v-model="form.sexo">
+                                        <option value="Educación Inicial">Femenino</option>
+                                        <option value="Educación Integral">Masculino</option>
+                                    </select>
                                     <label for="sexo">Género:</label>
                                 </div>
                             </div>

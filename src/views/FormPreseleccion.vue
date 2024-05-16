@@ -138,6 +138,7 @@
                                         <div class="form-group mb-3">
                                             <input type="text" class="form-control" v-model="form2.t_u_c"
                                                 placeholder="Total U/C" readonly />
+
                                         </div>
                                         <br>
 
@@ -298,42 +299,23 @@ export default {
     },
 
     methods: {
+        sumarUC() {
+            let suma = 0;
+            for (let i = 0; i < this.value.length; i++) {
+                suma += parseInt(this.value[i].u_c);
+            }
+            this.form2.t_u_c = suma;
+            return suma;
+        },
         guardar() {
-            let sumaCodigos = 0;
             const cursosSeleccionados = this.value;
+            const nombresCursos = ['', '_dos', '_tres', '_cuatro', '_cinco', '_seis']; // Array con los nombres de los cursos
+
             for (let i = 0; i < cursosSeleccionados.length; i++) {
                 const curso = cursosSeleccionados[i];
-                switch (i) {
-                    case 0:
-                        this.form2.curso = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    case 1:
-                        this.form2.curso_dos = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    case 2:
-                        this.form2.curso_tres = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    case 3:
-                        this.form2.curso_cuatro = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    case 4:
-                        this.form2.curso_cinco = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    case 5:
-                        this.form2.curso_seis = curso.name;
-                        sumaCodigos += parseInt(curso.u_c);
-                        break;
-                    default:
-                        break;
-                }
-
+                // Asigna el nombre del curso al campo correspondiente (curso, curso_dos, curso_tres, etc.)
+                this.form2[`curso${nombresCursos[i]}`] = curso.name;
             }
-            this.form2.t_u_c = sumaCodigos
 
             const fechaActual = new Date().toISOString().split('T')[0];
             this.form2.fecha = fechaActual;
@@ -490,10 +472,16 @@ export default {
                 console.log(data)
             })
             .catch(e => console.error(e))
+    },
+    watch: {
+        value: {
+            handler() {
+                this.form2.t_u_c = this.sumarUC();
+            },
+            deep: true,
+        },
+    },
 
-
-
-    }
 }
 
 

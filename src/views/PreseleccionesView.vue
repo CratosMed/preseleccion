@@ -32,15 +32,13 @@
                     <!-- Columna 2 -->
                     <form class="row">
                         <div class="col-3 padin">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Seleccionar
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Periodo 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Periodo 2</a></li>
-                                </ul>
+                            <div class="form-floatin seleccionar">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="1">Periodo 1</option>
+                                    <option value="2">Periodo 2</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-3 padin">
@@ -56,11 +54,8 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br />
-        <br />
+        <div class="margen">
+        </div>
         <DataTable :data="preseleccionesview" :columns="columns" class="table table-striped table-bordered display"
             ref="table" :options="{
         responsive: true, autoWidth: false, dom: dom, select: true, language: {
@@ -164,10 +159,21 @@ export default {
                 {
                     data: null,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-primary" data-id_preseleccion="' + row.id_preseleccion + '" data-nombre="' + row.nombre + '"><i class="bi bi-trash"></i></i></button>'
+                        const fechaFila = row.fecha; // Supongamos que 'fecha' es el campo de fecha en la fila
 
-                    },
-                }
+                        // Verifica si la fecha de la fila está dentro del rango del periodo actual
+                        console.log(fechaFila)
+                        const mostrarBoton = this.fechaEnRango(fechaFila);
+
+                        // Renderiza el botón solo si la fecha está en el periodo actual
+                        if (mostrarBoton) {
+                            return '<button class="btn btn-primary" data-id_preseleccion="' + row.id_preseleccion + '" data-nombre="' + row.nombre + '"><i class="bi bi-trash"></i></button>';
+                        } else {
+                            return ''; // Devuelve una cadena vacía si no se debe mostrar el botón
+                        }
+                    }.bind(this), // Asegúrate de que 'this' apunte al contexto correcto
+                },
+
             ],
             'rowsGroup': [0],
             botones: [
@@ -231,7 +237,26 @@ export default {
 
     },
     methods: {
+        fechaEnRango(fecha) {
+            const fechaComparar = new Date(fecha);
+            const fechaActual = new Date(); // Obtener la fecha actual del sistema
 
+            // Encuentra el periodo actual basado en la fecha actual
+            const periodoActual = this.periodos.find(periodo => {
+                const fechaInicio = new Date(periodo.fechaInicio);
+                const fechaFin = new Date(periodo.fechaFin);
+                return fechaActual >= fechaInicio && fechaActual <= fechaFin;
+            });
+
+            if (periodoActual) {
+                // Si hay un periodo actual, verifica si la fecha de la fila está dentro de su rango
+                const fechaInicioPeriodo = new Date(periodoActual.fechaInicio);
+                const fechaFinPeriodo = new Date(periodoActual.fechaFin);
+                return fechaComparar >= fechaInicioPeriodo && fechaComparar <= fechaFinPeriodo;
+            }
+
+            return false; // Si no se encuentra un periodo actual, devolver false
+        },
         eliminar(event) {
             const button = event.target.closest('button');
             if (button) {
@@ -332,6 +357,10 @@ export default {
     padding: 0px;
 }
 
+.margen {
+    margin-top: 5%;
+}
+
 .margen1 {
     margin-left: 8%;
 
@@ -358,5 +387,11 @@ export default {
     text-align: right;
     background-color: #041B2D;
     font-size: 15px;
+}
+
+.seleccionar {
+    height: calc(-85.5rem + calc(var(--bs-border-width)* 2));
+    min-height: calc(-1.5rem + calc(var(--bs-border-width)* 2));
+    line-height: 1.25;
 }
 </style>

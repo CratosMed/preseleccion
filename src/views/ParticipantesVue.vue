@@ -5,15 +5,15 @@
         <br />
         <br />
 
-        <DataTable :data="participantes" :columns="columns" class="table table-striped table-bordered display" ref="table"
-            :options="{
-                responsive: true, autoWidth: false, dom: dom, select: true, language: {
-                    search: 'Buscar', zeroRecords: 'No hay registros para mostrar',
-                    info: 'Mostrando del _START_ a _END_ de _TOTAL_ registros',
-                    infoFiltered: '(Filtrados de _MAX_ registros.)',
-                    paginate: { first: 'Primero', previous: 'Anterior', next: 'Siguiente', last: 'Ultimo' }
-                }, buttons: botones
-            }" @click="handleTableClick">
+        <DataTable :data="participantes" :columns="columns" class="table table-striped table-bordered display"
+            ref="table" :options="{
+        responsive: true, autoWidth: false, dom: dom, select: true, language: {
+            search: 'Buscar', zeroRecords: 'No hay registros para mostrar',
+            info: 'Mostrando del _START_ a _END_ de _TOTAL_ registros',
+            infoFiltered: '(Filtrados de _MAX_ registros.)',
+            paginate: { first: 'Primero', previous: 'Anterior', next: 'Siguiente', last: 'Ultimo' }
+        }, buttons: botones
+    }" @click="handleTableClick">
             <thead>
                 <tr>
                     <th scope="col">#</th>

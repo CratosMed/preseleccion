@@ -14,10 +14,11 @@ import Dashboard from '../views/Dashboard.vue';
 import sobreNosotros from '../views/sobreNosotros.vue';
 import RecuperarClave from '../views/RecuperarClave.vue';
 import RecuperarClavepaso2 from '../views/RecuperarClavepaso2.vue';
-
+import axios from 'axios';
 
 /* eslint-disable */
 export default createRouter({
+
   history: createWebHistory(process.env.BASE_URL),
   routes: [
     {
@@ -27,28 +28,34 @@ export default createRouter({
       meta: { showSidebar: false, requiresAuth: true },
 
     },
+
     {
       path: '/inicio',
       name: 'inicio',
       component: Dashboard,
       meta: { showSidebar: true, requiresAuth: true },
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = localStorage.token; // Puedes ajustar esto según cómo almacenas la información de autenticación
-
-        // Verifica si la ruta requiere autenticación
-        if (to.matched.some(record => record.meta.requiresAuth)) {
-          // Redirige a la página de inicio de sesión si no está autenticado
-          if (!isAuthenticated) {
-            next('/'); // Puedes cambiar '/' por la ruta de tu página de inicio o login
-          } else {
-            // Continúa con la navegación si está autenticado
-            next();
-          }
+        const token = localStorage.getItem('token');
+        if (!token) {
+          next('/');
         } else {
-          // Continúa con la navegación para rutas que no requieren autenticación
-          next();
+          const direccion3 = "http://localhost/preseleccion/sistemaapi/apirest/auth.php?token=" + token;
+          axios.get(direccion3)
+            .then(response => {
+              const estatus = response.data[0].estatus;
+              if (estatus === 'admin') {
+                next();
+              } else {
+                next('/');
+              }
+            })
+            .catch(error => {
+              console.error("Error al obtener el estado del usuario:", error);
+              next('/');
+            });
         }
       },
+
     },
 
 

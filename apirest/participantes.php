@@ -21,7 +21,7 @@
                 header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
 
             if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-                header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin, Authorization, X-Requested-With, Content-Type, Accept, id_participantes, token");
+                header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin, Authorization, X-Requested-With, Content-Type, Accept, id_participante, token");
 
             exit(0);
         }
@@ -41,6 +41,12 @@
         } elseif (isset($_GET["cedula"])) {
             $cedula = $_GET["cedula"];
             $datosParticipante = $_participantes->obtenerParticipanteCedula($cedula);
+            header("Content-Type: application/json");
+            echo json_encode($datosParticipante);
+            http_response_code(200);
+        } elseif (isset($_GET["id"])) {
+            $id = $_GET["id"];
+            $datosParticipante = $_participantes->obtenerParticipante($id);
             header("Content-Type: application/json");
             echo json_encode($datosParticipante);
             http_response_code(200);
@@ -77,11 +83,11 @@
     } else if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
         $headers = getallheaders();
 
-        if (isset($headers["token"]) && isset($headers["id_participantes"])) {
+        if (isset($headers["token"]) && isset($headers["id_participante"])) {
             //recibimos los datos por el header
             $send = [
                 "token" => $headers["token"],
-                "id_participantes" => $headers["id_participantes"]
+                "id_participante" => $headers["id_participante"]
             ];
             $postBody = json_encode($send);
         } else {

@@ -64,10 +64,14 @@ export default {
         } else if (rutaActual == '/sobreNosotros' && estatus == 'admin') {
           this.$router.push('/inicio');
         } else if (rutaActual === '/sobreNosotros' && estatus == 'usuario') {
-          this.$router.push(this.rutaAnterior);
+          this.$router.push('/preseleccion/' + this.data[0].cedula);
         } else if (estatus == 'admin') {
           this.$router.push('/inicio');
+        } else if (estatus == 'usuario') {
+          this.$router.push('/preseleccion/' + this.data[0].cedula);
+
         }
+        console.log(this.data)
       })
     },
   },

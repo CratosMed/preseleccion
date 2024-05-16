@@ -13,8 +13,10 @@
       <div class="col-1"></div>
       <div class="col-lg-5 col-md-4  align-content-center" style="z-index: 10">
 
-        <h1 class=" display-5 fw-bold ls-tight  mt-2" style="color: hsl(218, 81%, 95%)">
-          Bienvenidos a <span class="texto " style="color: hsl(218, 81%, 75%)"> Presélek</span> el Sistema
+        <h1 class="display-5 fw-bold ls-tight mt-2" style="color: #40B3D6;">
+          Bienvenidos a <span class="texto " style="color: #0960A6
+
+;"> Presélek</span> el Sistema
           de
           Preselección
           de

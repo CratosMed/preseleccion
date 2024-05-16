@@ -6,10 +6,8 @@
                 <img class="custom-image" :src="require('@/assets/logo5.png')" />
             </div>
             <br>
-            <div class="search-bar">
-
-                <input v-if="isCollapsed !== true" type="text" v-model="searchQuery" placeholder="Buscar... " />
-            </div>
+            <br>
+            <br>
             <br>
             <br>
             <br>
@@ -71,7 +69,7 @@ export default {
     },
 };
 </script>
-  
+
 <style scoped>
 .custom-image {
     height: 100px;
@@ -149,4 +147,3 @@ i {
     color: #fff;
 }
 </style>
-  
