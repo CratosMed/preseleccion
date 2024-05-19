@@ -38,12 +38,14 @@ export default createRouter({
         const token = localStorage.getItem('token');
         if (!token) {
           next('/');
+          connsole.log("llego aqui")
         } else {
           const direccion3 = "http://localhost/preseleccion/sistemaapi/apirest/auth.php?token=" + token;
           axios.get(direccion3)
             .then(response => {
               const estatus = response.data[0].estatus;
-              if (estatus === 'admin') {
+              const estado = response.data[0].estado;
+              if (estatus === 'admin' && estado === 'Activo') {
                 next();
               } else {
                 next('/');

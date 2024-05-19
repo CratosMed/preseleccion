@@ -33,21 +33,23 @@
                     <form class="row">
                         <div class="col-3 padin">
                             <div class="form-floatin seleccionar">
-                                <select class="form-select" id="floatingSelect"
+                                <select v-model="form.nombre" class="form-select" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option value="" disabled selected>Seleccionar</option>
-                                    <option value="1">Periodo 1</option>
-                                    <option value="2">Periodo 2</option>
+                                    <option value="Periodo 1-">Periodo 1</option>
+                                    <option value="Periodo 2-">Periodo 2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-3 padin">
-                            <input v-model="fechaInicio" type="date" placeholder="Fecha de inicio" class="form-control">
+                            <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
+                                class="form-control">
                         </div>
                         <div class="col-3 padin">
                             <div class="input-group">
-                                <input v-model="fechaFinal" type="date" placeholder="Fecha Final" class="form-control">
-                                <button class="btn btn-success"><i class="bi bi-plus"></i></button>
+                                <input v-model="form.fechaFin" type="date" placeholder="Fecha Final"
+                                    class="form-control">
+                                <button class="btn btn-success" @click="addPeriodo"><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
                     </form>
@@ -125,12 +127,18 @@ export default {
             isCollapsed: false,
             fechaInicio: null,
             fechaFinal: null,
+            form: {
+                nombre: "",
+                fechaInicio: "",
+                fechaFin: "",
+                token: "",
+            },
             periodoSeleccionado: '', // Almacena el rango de fechas seleccionado
             periodos: [ // Reemplaza esto con tu lista de periodos o genera dinámicamente
-                { id: 1, nombre: 'Periodo 1-2023', fechaInicio: '2023-01-01', fechaFin: '2023-06-30' },
-                { id: 2, nombre: 'Periodo 2-2023', fechaInicio: '2023-07-01', fechaFin: '2023-12-31' },
-                { id: 3, nombre: 'Periodo 1-2024', fechaInicio: '2024-01-01', fechaFin: '2024-06-30' },
-                { id: 4, nombre: 'Periodo 2-2024', fechaInicio: '2024-07-01', fechaFin: '2024-12-31' },
+                //{ id: 1, nombre: 'Periodo 1-2023', fechaInicio: '2023-01-01', fechaFin: '2023-06-30' },
+                //{ id: 2, nombre: 'Periodo 2-2023', fechaInicio: '2023-07-01', fechaFin: '2023-12-31' },
+                //{ id: 3, nombre: 'Periodo 1-2024', fechaInicio: '2024-01-01', fechaFin: '2024-06-30' },
+                //{ id: 4, nombre: 'Periodo 2-2024', fechaInicio: '2024-07-01', fechaFin: '2024-12-31' },
                 // ... otros periodos ...
 
             ].sort((a, b) => {
@@ -162,7 +170,7 @@ export default {
                         const fechaFila = row.fecha; // Supongamos que 'fecha' es el campo de fecha en la fila
 
                         // Verifica si la fecha de la fila está dentro del rango del periodo actual
-                        console.log(fechaFila)
+
                         const mostrarBoton = this.fechaEnRango(fechaFila);
 
                         // Renderiza el botón solo si la fecha está en el periodo actual
@@ -237,6 +245,25 @@ export default {
 
     },
     methods: {
+        addPeriodo() {
+            this.guardar()
+        },
+        guardar() {
+            this.form.token = localStorage.getItem("token");
+            this.form.nombre = this.form.nombre + this.form.fechaInicio.split("-", 1)
+            //crear periodos
+            axios
+                .post("http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php", this.form)
+                .then(data => {
+                    console.log(data);
+                    this.$router.push("preselecciones");
+                }).catch(error => {
+                    console.log(error);
+
+                })
+            console.log(this.form)
+
+        },
         fechaEnRango(fecha) {
             const fechaComparar = new Date(fecha);
             const fechaActual = new Date(); // Obtener la fecha actual del sistema
@@ -291,7 +318,7 @@ export default {
             axios.get(direccion).then(datos => {
                 // Ordenar los datos por fecha de manera descendente
                 this.preseleccionesview = datos.data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-                console.log(this.preseleccionesview);
+
             });
         },
 
@@ -308,8 +335,7 @@ export default {
                     this.preseleccionesview = response.data;
 
 
-                    // Mensaje de éxito (puedes ajustarlo según tus necesidades)
-                    console.log('Datos filtrados y tabla actualizada:', this.preseleccionesview);
+
                 } catch (error) {
                     // Manejar errores (puedes ajustarlo según tus necesidades)
                     console.error('Error al filtrar datos:', error);
@@ -343,6 +369,13 @@ export default {
     mounted() {
         // Cargar los datos originales al inicio
         this.cargarDatos();
+
+        let direccion = "http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php?page=" + this.pagina;
+
+        axios.get(direccion).then(datos => {
+            this.periodos = datos.data;
+
+        })
 
 
     },

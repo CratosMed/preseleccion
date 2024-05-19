@@ -52,27 +52,31 @@ export default {
     },
     redireccionarInicio() {
       const token = localStorage.getItem('token')
-      let direccion3 = "http://localhost/preseleccion/sistemaapi/apirest/auth.php?token=" + token;
+      if (!token) {
+        this.$router.push('/')
+      } else {
+        let direccion3 = "http://localhost/preseleccion/sistemaapi/apirest/auth.php?token=" + token;
 
-      axios.get(direccion3).then(datos => {
-        this.data = datos.data;
-        const estatus = this.data[0].estatus
-        const rutaActual = this.$route.path;
+        axios.get(direccion3).then(datos => {
+          this.data = datos.data;
+          const estatus = this.data[0].estatus
+          const rutaActual = this.$route.path;
 
-        if (rutaActual === '/login') {
-          this.$router.push('/login');
-        } else if (rutaActual == '/sobreNosotros' && estatus == 'admin') {
-          this.$router.push('/inicio');
-        } else if (rutaActual === '/sobreNosotros' && estatus == 'usuario') {
-          this.$router.push('/preseleccion/' + this.data[0].cedula);
-        } else if (estatus == 'admin') {
-          this.$router.push('/inicio');
-        } else if (estatus == 'usuario') {
-          this.$router.push('/preseleccion/' + this.data[0].cedula);
+          if (rutaActual === '/login') {
+            this.$router.push('/login');
+          } else if (rutaActual == '/sobreNosotros' && estatus == 'admin') {
+            this.$router.push('/inicio');
+          } else if (rutaActual === '/sobreNosotros' && estatus == 'usuario') {
+            this.$router.push('/preseleccion/' + this.data[0].cedula);
+          } else if (estatus == 'admin') {
+            this.$router.push('/inicio');
+          } else if (estatus == 'usuario') {
+            this.$router.push('/preseleccion/' + this.data[0].cedula);
+          }
+          console.log(this.data)
+        })
+      }
 
-        }
-        console.log(this.data)
-      })
     },
   },
 };

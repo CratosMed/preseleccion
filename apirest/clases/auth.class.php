@@ -73,7 +73,7 @@ class auth extends conexion
     }
     public function obtenerEstatus($token)
     {
-        $query = "SELECT u.estatus, u_t.id_usuario, u.cedula  FROM usuarios_token as u_t, usuarios as u WHERE u.id_usuario=u_t.id_usuario AND token='$token'";
+        $query = "SELECT u.estatus,u.estado, u_t.id_usuario, u.cedula  FROM usuarios_token as u_t, usuarios as u WHERE u.id_usuario=u_t.id_usuario AND token='$token'";
         $datos = parent::obtenerDatos($query);
         return $datos;
     }

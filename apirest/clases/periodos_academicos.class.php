@@ -9,9 +9,9 @@ class periodos_academicos extends conexion
 
     private $table = "periodos_academicos";
     private $id_periodo = "";
-    private $periodo = "";
-    private $id_preseleccion = "";
-    private $id_cedula = "";
+    private $nombre = "";
+    private $fechaInicio = "";
+    private $fechaFin = "";
     private $token = "";
 
     public function listaperiodos_academicos($pagina = 1)
@@ -22,7 +22,7 @@ class periodos_academicos extends conexion
             $inicio = ($cantidad * ($pagina - 1)) + 1;
             $cantidad = $cantidad * $pagina;
         }
-        $query = "SELECT id_periodo, periodo, id_preseleccion, id_cedula FROM " . $this->table . " limit $inicio,  $cantidad ";
+        $query = "SELECT id_periodo, nombre, fechaInicio, fechaFin FROM " . $this->table . " limit $inicio,  $cantidad ";
         $datos = parent::obtenerDatos($query);
         return $datos;
     }
@@ -41,13 +41,13 @@ class periodos_academicos extends conexion
             return $_respuestas->error_401();
         } else {
         }
-        if (!isset($datos['periodo']) || !isset($datos['id_preseleccion'])) {
+        if (!isset($datos['nombre']) || !isset($datos['fechaInicio'])) {
             return $_respuestas->error_400();
         } else {
-            $this->periodo = $datos['periodo'];
-            $this->id_preseleccion = $datos['id_preseleccion'];
-            if (isset($datos['id_cedula'])) {
-                $this->id_cedula = $datos['id_cedula'];
+            $this->nombre = $datos['nombre'];
+            $this->fechaInicio = $datos['fechaInicio'];
+            if (isset($datos['fechaFin'])) {
+                $this->fechaFin = $datos['fechaFin'];
             };
             $resp = $this->insertarPeriodo();
             if ($resp) {
@@ -65,11 +65,12 @@ class periodos_academicos extends conexion
 
     private function insertarPeriodo()
     {
-        $query = "insert into " . $this->table . " (periodo,id_preseleccion,id_cedula) 
+        $query = "insert into " . $this->table . " (nombre,fechaInicio,fechaFin) 
         values
-        ('" . $this->periodo . "','" . $this->id_cedula . "','" . $this->id_preseleccion . "')";
+        ('" . $this->nombre . "','" . $this->fechaInicio . "','" . $this->fechaFin . "')";
 
         $resp = parent::nonQueryId($query);
+
 
         if ($resp) {
             return $resp;
@@ -87,14 +88,14 @@ class periodos_academicos extends conexion
             return $_respuestas->error_400();
         } else {
             $this->id_periodo = $datos['id_periodo'];
-            if (isset($datos['periodo'])) {
-                $this->periodo = $datos['periodo'];
+            if (isset($datos['nombre'])) {
+                $this->nombre = $datos['nombre'];
             };
-            if (isset($datos['id_preseleccion'])) {
-                $this->id_preseleccion = $datos['id_preseleccion'];
+            if (isset($datos['fechaInicio'])) {
+                $this->fechaInicio = $datos['fechaInicio'];
             };
-            if (isset($datos['id_cedula'])) {
-                $this->id_cedula = $datos['id_cedula'];
+            if (isset($datos['fechaFin'])) {
+                $this->fechaFin = $datos['fechaFin'];
             };
 
             $resp = $this->modificarPeriodo();
@@ -113,7 +114,7 @@ class periodos_academicos extends conexion
 
     private function modificarPeriodo()
     {
-        $query = "UPDATE " . $this->table . " SET periodo ='" . $this->periodo . "',id_preseleccion ='" . $this->id_preseleccion  . "',id_cedula ='" . $this->id_cedula .
+        $query = "UPDATE " . $this->table . " SET nombre ='" . $this->nombre . "',fechaInicio ='" . $this->fechaInicio  . "',fechaFin ='" . $this->fechaFin .
             "'WHERE id_periodo = '" . $this->id_periodo . "'";
 
         $resp = parent::nonQuery($query);

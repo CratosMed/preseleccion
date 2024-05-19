@@ -1,11 +1,14 @@
 <?php
 require_once 'conexion/conexion.php';
 
-class token extends conexion
+class Token extends conexion
 {
     public function actualizarToken($fecha)
     {
-        $query = "UPDATE usuarios_token  SET estado = 'Inactivo' WHERE fecha <'$fecha' AND estado = 'Activo'";
+        // $fecha es la hora actual menos 5 minutos
+        $query = "UPDATE usuarios_token 
+                  SET estado = 'Inactivo' 
+                  WHERE ultima_actividad < '$fecha' AND estado = 'Activo'";
 
         $verificar = parent::nonQuery($query);
         if ($verificar > 0) {
@@ -14,6 +17,7 @@ class token extends conexion
             return 0;
         }
     }
+
     function crearTxt($direccion)
     {
         $archivo = fopen($direccion, 'w') or die("error al crear el archivo de registros");
@@ -28,7 +32,6 @@ class token extends conexion
         if (!file_exists($direccion)) {
             $this->crearTxt($direccion);
         }
-        /* crear una entrada nueva */
         $this->escribirTxt($direccion, $registros);
     }
 

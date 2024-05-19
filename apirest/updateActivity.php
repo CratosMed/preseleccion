@@ -1,4 +1,5 @@
 <?php
+require_once 'clases/conexion/conexion.php';
 function cors()
 {
     // Allow from any origin
@@ -24,13 +25,37 @@ function cors()
     }
 }
 cors();
-require_once '../clases/token.class.php';
-$_token = new Token;
-$fecha = date('Y-m-d H:i:s', strtotime('-5 minutes'));
-$actualizacion = $_token->actualizarToken($fecha);
 
-$logFile = '../logs/cron_log.txt';
-$logMessage = date('Y-m-d H:i:s') . " - Script executed. Tokens updated: " . $actualizacion . "\n";
-file_put_contents($logFile, $logMessage, FILE_APPEND);
+class Activity extends conexion
+{
+    public function actualizarActividad($token, $lastActivityTime)
+    {
+        $query = "UPDATE usuarios_token SET ultima_actividad = '$lastActivityTime' WHERE token = '$token'";
+        $verificar = parent::nonQuery($query);
+        return $verificar;
+    }
+}
 
-echo $actualizacion;
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (isset($data['token']) && isset($data['lastActivityTime'])) {
+    $token = $data['token'];
+    $lastActivityTime = $data['lastActivityTime'];
+
+    // Debugging output
+    error_log("Received data: token = $token, lastActivityTime = $lastActivityTime");
+
+    $activity = new Activity();
+    $resultado = $activity->actualizarActividad($token, $lastActivityTime);
+
+    if ($resultado > 0) {
+        echo json_encode(["success" => true, "updated_records" => $resultado]);
+    } else {
+        echo json_encode(["success" => false]);
+    }
+} else {
+    // Debugging output
+    error_log("Datos incompletos: " . json_encode($data));
+
+    echo json_encode(["success" => false, "message" => "Datos incompletos"]);
+}
