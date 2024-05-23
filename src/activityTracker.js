@@ -23,10 +23,10 @@ const sendActivityToServer = () => {
         const localDate = new Date(lastActivityTime);
         const formattedDate = formatDate(localDate);
 
-        console.log("Sending data:", {
-            token: token,
-            lastActivityTime: formattedDate
-        });
+        // console.log("Sending data:", {
+        //     token: token,
+        //     lastActivityTime: formattedDate
+        // });
 
         axios.post('http://localhost/preseleccion/sistemaapi/apirest/updateActivity.php', {
             token: token,
@@ -35,11 +35,13 @@ const sendActivityToServer = () => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(response => {
-            console.log("Server response:", response.data);
-        }).catch(error => {
-            console.error("Error al enviar la actividad del usuario:", error);
-        });
+        })
+            .then(response => {
+                "Server response:", response.data;
+
+            }).catch(error => {
+                console.error("Error al enviar la actividad del usuario:", error);
+            });
     }
 };
 
