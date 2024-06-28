@@ -24,7 +24,8 @@
 
       <div class="form-group left">
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="correo" id="correo" v-model="form.correo" placeholder="Correo" />
+          <input type="text" class="form-control" name="correo" id="correo" v-model="form.correo"
+            placeholder="Correo" />
         </div>
       </div>
 
@@ -37,7 +38,8 @@
 
       <div class="form-group left">
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="correo" id="correo" v-model="form.correo" placeholder="Usuario" />
+          <input type="text" class="form-control" name="correo" id="correo" v-model="form.correo"
+            placeholder="Usuario" />
         </div>
       </div>
 
@@ -60,7 +62,7 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 
 import Footer from '@/components/FooterVue.vue';
@@ -116,9 +118,10 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 .left {
   text-align: left;
   margin: 20px;
-}</style>
+}
+</style>

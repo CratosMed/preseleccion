@@ -3,59 +3,76 @@
         <MenuLateral @collapsed-updated="updateCollapsed" v-if="showSidebar" :menuItems="menuItems"
             @menu-item-click="handleMenuItemClick" />
         <br />
-
-        <div class="container mt-4 ">
-            <div class="row ">
-                <!-- Columna 1 -->
-                <div class="col-md-4 margen1">
-                    <label for="periodo" class="form-label">
-                        <strong>
-                            <h4><strong>Seleccionar Periodo:</strong></h4>
-                        </strong>
-                    </label>
-                    <select v-model="periodoSeleccionado" class="form-select ">
-                        <option v-for="periodo in periodos" :key="periodo.id"
-                            :value="periodo.fechaInicio + ',' + periodo.fechaFin">
-                            {{ periodo.nombre }}
-                        </option>
-                    </select>
+        <div class="col-lg-12 col-md-8">
+            <h5 class="display-5 fw-bold custom-h5 " style="color: #000;">
+                Preselecciones
+            </h5>
+        </div>
+        <br />
+        <br />
+        <div class="">
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Columna 1 -->
+                    <div class="col-md-4 margen1">
+                        <label for="periodo" class="form-label">
+                            <strong>
+                                <h4><strong>Seleccionar Periodo:</strong></h4>
+                            </strong>
+                        </label>
+                        <select v-model="periodoSeleccionado" class="form-select ">
+                            <option v-for="periodo in periodos" :key="periodo.id"
+                                :value="periodo.fechaInicio + ',' + periodo.fechaFin">
+                                {{ periodo.nombre }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-
-                <!-- Columna 2 -->
-
-                <div class="col-md-6 margen2">
-                    <label for="periodo" class="form-label">
-                        <strong>
-                            <h4 class="centrarperiodo"><strong>Nuevo Periodo:</strong></h4>
-                        </strong>
-                    </label>
-                    <!-- Columna 2 -->
-                    <form class="row">
-                        <div class="col-3 padin">
-                            <div class="form-floatin seleccionar">
-                                <select v-model="form.nombre" class="form-select" id="floatingSelect"
-                                    aria-label="Floating label select example">
-                                    <option value="" disabled selected>Seleccionar</option>
-                                    <option value="Periodo 1-">Periodo 1</option>
-                                    <option value="Periodo 2-">Periodo 2</option>
-                                </select>
+                <div class="col-sm">
+                    <div class="col-md-6 margen2">
+                        <label for="periodo" class="form-label">
+                            <strong>
+                                <h4 class="centrarperiodo"><strong>Nuevo Periodo:</strong></h4>
+                            </strong>
+                        </label>
+                        <!-- Columna 2 -->
+                        <form class="row">
+                            <div class="col-3 padin">
+                                <div class="form-floatin seleccionar">
+                                    <select v-model="form.nombre" class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option value="Periodo 1-">Periodo 1</option>
+                                        <option value="Periodo 2-">Periodo 2</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-3 padin">
-                            <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
-                                class="form-control">
-                        </div>
-                        <div class="col-3 padin">
-                            <div class="input-group">
-                                <input v-model="form.fechaFin" type="date" placeholder="Fecha Final"
+                            <div class="col-3 padin">
+                                <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
                                     class="form-control">
-                                <button class="btn btn-success" @click="addPeriodo"><i class="bi bi-plus"></i></button>
                             </div>
-                        </div>
-                    </form>
+                            <div class="col-3 padin">
+                                <div class="input-group">
+                                    <input v-model="form.fechaFin" type="date" placeholder="Fecha Final"
+                                        class="form-control">
+                                    <button class="btn btn-success" @click="addPeriodo"><i
+                                            class="bi bi-plus"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    One of three columns
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Columna 2 -->
+
+
         <div class="margen">
         </div>
         <DataTable :data="preseleccionesview" :columns="columns" class="table table-striped table-bordered display"
@@ -384,6 +401,15 @@ export default {
 
 <style scoped>
 @import 'datatables.net-bs5';
+
+.custom-h5 {
+    font-size: 2.5rem;
+    /* Tamaño de fuente para <h5> */
+    font-weight: bold;
+    /* Grosor de la fuente */
+    color: #000;
+    /* Color del texto */
+}
 
 
 .padin {

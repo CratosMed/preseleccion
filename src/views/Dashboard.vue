@@ -10,9 +10,9 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 mt-4 ">
                     <div class="card border border-dark">
-                        <div class="card-header bg-dark fuente">
-                            <button @click="graficos()" class="card-header bg-dark fuente1">
-                                <h4 class="titulo">Gráficos de Cursos</h4>
+                        <div class="card-header fuente1">
+                            <button @click="graficos()" class="btn btn- custom-h5">
+                                Gráficos de Cursos
                             </button>
                         </div>
                         <div class="card-body">
@@ -22,27 +22,23 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 mt-4 ">
                     <div class="card border border-dark">
-                        <div class="card-header bg-dark fuente">
-                            <button @click="preseleccion()" class="card-header bg-dark fuente1">
-                                <h4 class="titulo">Preselecciones</h4>
+                        <div class="card-header fuente1">
+                            <button @click="preseleccion()" class="btn btn- custom-h5">
+                                Preselecciones
                             </button>
                         </div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
-                                        <th scope="col">Total_U/C</th>
+                                        <th scope="col">Carrera</th>
+                                        <th scope="col">Total Participantes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="preseleccionview in preseleccionesview" :key="preseleccionview.cedula">
-
-                                        <td> {{ preseleccionview.nombre }} </td>
-                                        <td>{{ preseleccionview.apellido }}</td>
-                                        <td>{{ preseleccionview.t_u_c }}</td>
-
+                                    <tr v-for="carrerasData in carrerasDatas" :key="carrerasData.total_participantes">
+                                        <td>{{ carrerasData.carrera }}</td>
+                                        <td>{{ carrerasData.total_participantes }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -84,6 +80,7 @@ export default {
             //preseleccionesview: null,
             preselecciones: null,
             preseleccionesview: [],
+            carrerasDatas: [], // Object to store the aggregated data
             hola: 1,
             chartData: {
                 labels: [],
@@ -125,6 +122,16 @@ export default {
             this.isCollapsed = value;
         },
     },
+    // aggregateCarrerasData() {
+    //     const carreras = {};
+    //     this.preseleccionesview.forEach(item => {
+    //         if (!carreras[item.carrera]) {
+    //             carreras[item.carrera] = 0;
+    //         }
+    //         carreras[item.carrera] += item.t_u_c;
+    //     });
+    //     this.carrerasData = carreras;
+    // },
     watch: {
         $route(to) {
             // Consulta la meta "showSidebar" de la ruta actual
@@ -150,8 +157,10 @@ export default {
         console.log(direccion2);
         axios.get(direccion2).then(datos => {
             this.preseleccionesview = datos.data;
+            // this.aggregateCarrerasData(); // Call the method to aggregate data
             console.log(datos);
         })
+
         this.token = localStorage.getItem("token");
         let direccion3 = "http://localhost/preseleccion/sistemaapi/apirest/auth.php?token=" + this.token;
         console.log(direccion3);
@@ -162,8 +171,18 @@ export default {
 
             axios.get(direccion2).then(datos => {
                 this.preseleccionesview = datos.data.slice(-17);
+                //this.aggregateCarrerasData(); // Call the method again to aggregate data
                 console.log('Datos de preseleccionesview:', this.preseleccionesview);
             });
+
+        let direccion4 = "http://localhost/preseleccion/sistemaapi/apirest/preseleccion.php?carreras=" + this.hola;
+        axios.get(direccion4).then(datos => {
+            this.carrerasDatas = datos.data;
+            console.log(this.carrerasDatas)
+
+        }).catch(error => {
+            console.error("Error al obtener datos desde la API", error);
+        });
     },
 
 };
@@ -171,6 +190,15 @@ export default {
 </script>
 
 <style scoped>
+.custom-h5 {
+    font-size: 1.5rem;
+    /* Tamaño de fuente para <h5> */
+    font-weight: bold;
+    /* Grosor de la fuente */
+    color: #fff;
+    /* Color del texto */
+}
+
 .izquierda {
     text-align: left;
 }
@@ -205,10 +233,15 @@ export default {
 
 .fuente1 {
     width: 100%;
-    height: 15px;
+    height: 10%;
+    background-color: #041B2D;
 }
 
 .titulo {
     color: #fff;
+}
+
+.btn.custom-h5:hover {
+    background-color: #fff;
 }
 </style>

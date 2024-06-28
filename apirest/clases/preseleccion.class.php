@@ -285,7 +285,15 @@ class preseleccion extends conexion
             }
         }
     }
+    public function obtenerlParticipantesPorCarrera()
+    {
+        $query = "SELECT carrera, COUNT(*) as total_participantes
+                  FROM participantes
+                  GROUP BY carrera";
 
+        $datos = parent::obtenerDatos($query);
+        return $datos;
+    }
     // private function eliminarParticipante()
     // {
     //     $query = "DELETE FROM " . $this->table . " WHERE id_preseleccion = '" . $this->id_preseleccion . "'";

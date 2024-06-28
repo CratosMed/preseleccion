@@ -44,6 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         header("Content-Type: application/json");
         echo json_encode($datosPreseleccion);
         http_response_code(200);
+    } elseif (isset($_GET["carreras"])) {
+        $carreras = $_GET["carreras"];
+        $datosCarreras = $_preseleccion->obtenerlParticipantesPorCarrera();
+        header("Content-Type: application/json");
+        echo json_encode($datosCarreras);
+        http_response_code(200);
     } elseif (isset($_GET["id_participante"])) {
         $preseleccionId = $_GET["id_participante"];
         $datosPreseleccion = $_preseleccion->obtenerPreseleccionId($preseleccionId);

@@ -2,8 +2,14 @@
     <div :class='contentClass'>
         <MenuLateral @collapsed-updated="updateCollapsed" v-if="showSidebar" />
         <br />
+        <div class="col-lg-12 col-md-8">
+            <h5 class="display-5 fw-bold custom-h5 " style="color: #000;">
+                Usuarios
+            </h5>
+        </div>
         <br />
         <br />
+
 
         <DataTable :data="usuario" :columns="columns" class="table table-striped table-bordered display" ref="table"
             :options="{
@@ -151,6 +157,15 @@ export default {
 </script>
 <style scoped>
 @import 'datatables.net-bs5';
+
+.custom-h5 {
+    font-size: 2.5rem;
+    /* Tamaño de fuente para <h5> */
+    font-weight: bold;
+    /* Grosor de la fuente */
+    color: #000;
+    /* Color del texto */
+}
 
 .full {
     width: 100%;

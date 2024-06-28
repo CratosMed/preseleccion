@@ -2,25 +2,30 @@
     <div :class='contentClass'>
         <MenuLateral @collapsed-updated="updateCollapsed" v-if="showSidebar" :menuItems="menuItems"
             @menu-item-click="handleMenuItemClick" />
+
         <br />
-        <br />
+        <div class="col-lg-12 col-md-8">
+            <h5 class="display-5 fw-bold custom-h5 " style="color: #000;">
+                Cursos y Secciones
+            </h5>
+        </div>
         <br />
 
         <DataTable :data="graficospreseleccion" :columns="columns" class="table table-striped table-bordered display"
             ref=" table" :options="{
-                responsive: true, autoWidth: false, dom: dom, select: true, language: {
-                    search: 'Buscar', zeroRecords: 'No hay registros para mostrar',
-                    info: 'Mostrando del _START_ a _END_ de _TOTAL_ registros',
-                    infoFiltered: '(Filtrados de _MAX_ registros.)',
-                    paginate: { first: 'Primero', previous: 'Anterior', next: 'Siguiente', last: 'Ultimo' }
+        responsive: true, autoWidth: false, dom: dom, select: true, language: {
+            search: 'Buscar', zeroRecords: 'No hay registros para mostrar',
+            info: 'Mostrando del _START_ a _END_ de _TOTAL_ registros',
+            infoFiltered: '(Filtrados de _MAX_ registros.)',
+            paginate: { first: 'Primero', previous: 'Anterior', next: 'Siguiente', last: 'Ultimo' }
 
-                }, buttons: botones
-            }">
+        }, buttons: botones
+    }">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Cod</th>
-                    <th scope="col">Materias</th>
+                    <th scope="col">Cursos</th>
                     <th scope="col">Participantes</th>
                     <th scope="col">Participantes por Secciones</th>
                     <th scope="col">Secciones</th>
@@ -253,6 +258,15 @@ export default {
 </script>
 <style scoped>
 @import 'datatables.net-bs5';
+
+.custom-h5 {
+    font-size: 2.5rem;
+    /* Tamaño de fuente para <h5> */
+    font-weight: bold;
+    /* Grosor de la fuente */
+    color: #000;
+    /* Color del texto */
+}
 
 .full {
     width: 100%;
