@@ -10,64 +10,69 @@
         </div>
         <br />
         <br />
-        <div class="">
-            <div class="row">
-                <div class="col-sm">
-                    <!-- Columna 1 -->
-                    <div class="col-md-4 margen1">
+        <div class="container">
+            <div class="row mb-3">
+                <!-- Columna 1 -->
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <div class="text-center">
                         <label for="periodo" class="form-label">
-                            <strong>
-                                <h4><strong>Seleccionar Periodo:</strong></h4>
-                            </strong>
+                            <strong>Seleccionar período:</strong>
                         </label>
-                        <select v-model="periodoSeleccionado" class="form-select ">
-                            <option v-for="periodo in periodos" :key="periodo.id"
-                                :value="periodo.fechaInicio + ',' + periodo.fechaFin">
-                                {{ periodo.nombre }}
-                            </option>
-                        </select>
                     </div>
+                    <select v-model="periodoSeleccionado" class="form-select form-select-sm">
+                        <option v-for="periodo in periodos" :key="periodo.id"
+                            :value="periodo.fechaInicio + ',' + periodo.fechaFin">
+                            {{ periodo.nombre }}
+                        </option>
+                    </select>
                 </div>
-                <div class="col-sm">
-                    <div class="col-md-6 margen2">
-                        <label for="periodo" class="form-label">
-                            <strong>
-                                <h4 class="centrarperiodo"><strong>Nuevo Periodo:</strong></h4>
-                            </strong>
+
+                <!-- Columna 2 -->
+                <div class="col-md-5 col-sm-12 mb-3">
+                    <div class="text-center">
+                        <label for="nuevoPeriodo" class="form-label">
+                            <strong>Nuevo período:</strong>
                         </label>
-                        <!-- Columna 2 -->
-                        <form class="row">
-                            <div class="col-3 padin">
-                                <div class="form-floatin seleccionar">
-                                    <select v-model="form.nombre" class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option value="" disabled selected>Seleccionar</option>
-                                        <option value="Periodo 1-">Periodo 1</option>
-                                        <option value="Periodo 2-">Periodo 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-3 padin">
-                                <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
-                                    class="form-control">
-                            </div>
-                            <div class="col-3 padin">
-                                <div class="input-group">
-                                    <input v-model="form.fechaFin" type="date" placeholder="Fecha Final"
-                                        class="form-control">
-                                    <button class="btn btn-success" @click="addPeriodo"><i
-                                            class="bi bi-plus"></i></button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
+                    <form class="row g-0 align-items-center">
+                        <div class="col-4">
+                            <select v-model="form.nombre" class="form-select" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option value="Periodo 1-">Periodo 1</option>
+                                <option value="Periodo 2-">Periodo 2</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
+                                class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" v-model="form.fechaFin" type="date" placeholder="Fecha Final">
+                        </div>
+                    </form>
                 </div>
-                <div class="col-sm">
-                    One of three columns
+
+                <!-- Botón -->
+                <div class="col-md-1 col-sm-12 mb-3 d-flex align-items-end">
+                    <button class="btn btn-success w-100" @click="addPeriodo" type="button"><i
+                            class="bi bi-plus"></i></button>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <div class="text-center">
+                        <label class="form-label">
+                            <strong>Columna 3:</strong>
+                        </label>
+                    </div>
+                    <!-- Contenido de la tercera columna -->
+                    <div class="text-center">
+                        One of three columns
+                    </div>
                 </div>
             </div>
         </div>
-
 
 
         <!-- Columna 2 -->
@@ -430,6 +435,10 @@ export default {
     margin-right: 0px;
 }
 
+.margen4 {
+    width: 100%;
+}
+
 .full {
     width: 100%;
     padding-left: 97px;
@@ -448,9 +457,40 @@ export default {
     font-size: 15px;
 }
 
-.seleccionar {
-    height: calc(-85.5rem + calc(var(--bs-border-width)* 2));
-    min-height: calc(-1.5rem + calc(var(--bs-border-width)* 2));
-    line-height: 1.25;
+.text-center {
+    text-align: center;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.g-0>.col-4 {
+    padding-right: 0;
+}
+
+.g-0>.col-4>.form-control,
+.g-0>.col-4>.form-select,
+.g-0>.col-4>.input-group>.form-control {
+    border-right-width: 0;
+}
+
+.form-select-sm {
+    max-width: 150px;
+    /* Adjust the max-width as needed */
+    margin: 0 auto;
+    /* Center the select box */
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-end {
+    align-items: flex-end;
 }
 </style>
