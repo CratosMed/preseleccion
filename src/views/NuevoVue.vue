@@ -99,8 +99,8 @@
               <div class="form-group left">
                 <div class="form-floating">
                   <select class="form-control" :disabled="form.editar" name="sexo" id="sexo" v-model="form.sexo">
-                    <option value="Educación Inicial">Femenino</option>
-                    <option value="Educación Integral">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
                   </select>
                   <label for="sexo">Género:</label>
                 </div>
@@ -155,6 +155,7 @@ export default {
         direccion: "",
         cedula: "",
         correo: "",
+        carrera: "",
         codigoPostal: "",
         genero: "",
         telefono: "",
