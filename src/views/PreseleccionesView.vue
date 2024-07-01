@@ -273,17 +273,23 @@ export default {
         guardar() {
             this.form.token = localStorage.getItem("token");
             this.form.nombre = this.form.nombre + this.form.fechaInicio.split("-", 1)
-            //crear periodos
-            axios
-                .post("http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php", this.form)
-                .then(data => {
-                    console.log(data);
-                    this.$router.push("preselecciones");
-                }).catch(error => {
-                    console.log(error);
+            if (this.form.nombre) {
+                axios
+                    .post("http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php", this.form)
+                    .then(data => {
+                        console.log(data);
+                        this.$router.push("preselecciones");
+                    }).catch(error => {
+                        console.log(error);
 
-                })
-            console.log(this.form)
+                    })
+                console.log(this.form)
+                this.cargarDatos()
+            } else {
+                alert("Agregue el rango para el periodo nuevo")
+            }
+            //crear periodos
+
 
         },
         fechaEnRango(fecha) {
@@ -342,6 +348,12 @@ export default {
                 this.preseleccionesview = datos.data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
             });
+            let direccion2 = "http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php?page=" + this.pagina;
+
+            axios.get(direccion2).then(datos => {
+                this.periodos = datos.data;
+
+            })
         },
 
         async filtrarPorPeriodo() {
@@ -392,12 +404,7 @@ export default {
         // Cargar los datos originales al inicio
         this.cargarDatos();
 
-        let direccion = "http://localhost/preseleccion/sistemaapi/apirest/periodos_academicos.php?page=" + this.pagina;
 
-        axios.get(direccion).then(datos => {
-            this.periodos = datos.data;
-
-        })
 
 
     },
