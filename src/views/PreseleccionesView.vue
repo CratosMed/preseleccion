@@ -3,14 +3,15 @@
         <MenuLateral @collapsed-updated="updateCollapsed" v-if="showSidebar" :menuItems="menuItems"
             @menu-item-click="handleMenuItemClick" />
         <br />
-        <div class="col-lg-12 col-md-8">
-            <h5 class="display-5 fw-bold custom-h5 " style="color: #000;">
+        <div class="text-cente">
+            <h5 class="display-5 fw-bold custom-titulo " style="color: #000;">
                 Preselecciones
             </h5>
         </div>
         <br />
         <br />
         <div class="container">
+
             <div class="row mb-3">
                 <!-- Columna 1 -->
                 <div class="col-md-3 col-sm-12 mb-3">
@@ -57,19 +58,6 @@
                 <div class="col-md-1 col-sm-12 mb-3 d-flex align-items-end">
                     <button class="btn btn-success w-100" @click="addPeriodo" type="button"><i
                             class="bi bi-plus"></i></button>
-                </div>
-
-                <!-- Columna 3 -->
-                <div class="col-md-3 col-sm-12 mb-3">
-                    <div class="text-center">
-                        <label class="form-label">
-                            <strong>Columna 3:</strong>
-                        </label>
-                    </div>
-                    <!-- Contenido de la tercera columna -->
-                    <div class="text-center">
-                        One of three columns
-                    </div>
                 </div>
             </div>
         </div>
@@ -499,5 +487,33 @@ export default {
 
 .align-items-end {
     align-items: flex-end;
+}
+
+@media (min-width: 353px) {
+    .custom-titulo {
+        font-size: 1.5rem;
+        /* Tamaño para pantallas pequeñas y superiores */
+    }
+}
+
+@media (min-width: 768px) {
+    .custom-titulo {
+        font-size: 1.75rem;
+        /* Tamaño para pantallas medianas y superiores */
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-titulo {
+        font-size: 2rem;
+        /* Tamaño para pantallas grandes y superiores */
+    }
+}
+
+@media (min-width: 1200px) {
+    .custom-titulo {
+        font-size: 2.25rem;
+        /* Tamaño para pantallas extra grandes */
+    }
 }
 </style>
