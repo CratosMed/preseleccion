@@ -12,9 +12,9 @@
         <br />
         <div class="container">
 
-            <div class="row mb-3">
+            <div class="row">
                 <!-- Columna 1 -->
-                <div class="col-md-3 col-sm-12 mb-3">
+                <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
                     <div class="text-center">
                         <label for="periodo" class="form-label">
                             <strong>Seleccionar período:</strong>
@@ -27,41 +27,49 @@
                         </option>
                     </select>
                 </div>
-
                 <!-- Columna 2 -->
-                <div class="col-md-5 col-sm-12 mb-3">
+                <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
                     <div class="text-center">
                         <label for="nuevoPeriodo" class="form-label">
                             <strong>Nuevo período:</strong>
                         </label>
                     </div>
-                    <form class="row g-0 align-items-center">
-                        <div class="col-4">
-                            <select v-model="form.nombre" class="form-select" id="floatingSelect"
-                                aria-label="Floating label select example">
-                                <option value="" disabled selected>Seleccionar</option>
-                                <option value="Periodo 1-">Periodo 1</option>
-                                <option value="Periodo 2-">Periodo 2</option>
-                            </select>
-                        </div>
-                        <div class="col-4">
-                            <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
-                                class="form-control">
-                        </div>
-                        <div class="col-4">
-                            <input class="form-control" v-model="form.fechaFin" type="date" placeholder="Fecha Final">
+                    <form class="">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-1"></div>
+                            <div class="col-3">
+                                <select v-model="form.nombre" class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option value="Periodo 1-">Periodo 1</option>
+                                    <option value="Periodo 2-">Periodo 2</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <input v-model="form.fechaInicio" type="date" placeholder="Fecha de inicio"
+                                    class="form-control">
+                            </div>
+                            <div class="col-3">
+                                <input class="form-control" v-model="form.fechaFin" type="date"
+                                    placeholder="Fecha Final">
+
+                            </div>
+                            <div class="col-1 d-flex align-items-end add">
+                                <button class="btn btn-success" @click="addPeriodo" type="button"><i
+                                        class="bi bi-plus"></i></button>
+                            </div>
+
                         </div>
                     </form>
                 </div>
 
                 <!-- Botón -->
-                <div class="col-md-1 col-sm-12 mb-3 d-flex align-items-end">
-                    <button class="btn btn-success w-100" @click="addPeriodo" type="button"><i
-                            class="bi bi-plus"></i></button>
-                </div>
+
+
             </div>
         </div>
 
+        <hr>
 
         <!-- Columna 2 -->
 
@@ -515,5 +523,9 @@ export default {
         font-size: 2.25rem;
         /* Tamaño para pantallas extra grandes */
     }
+}
+
+.add {
+    width: 10%;
 }
 </style>
