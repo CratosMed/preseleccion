@@ -7,7 +7,7 @@
         <strong>
           <h3 class="fuente font-weight-bold">Participante: {{ form.nombre }} {{ form.apellido }}</h3>
         </strong>
-        <hr class="linea">
+        <hr>
         <div class="container alto">
           <div class="row  container">
             <div class="col-sm-12 col-md-6 col-xl-4">
@@ -250,14 +250,6 @@ export default {
 </script>
 
 <style scoped>
-.linea {
-  height: 3px;
-  /* Grosor de la línea */
-  background-color: #083e68;
-  /* Color de la línea */
-  border: none;
-}
-
 .fuente {
   font-family: 'Mukta', sans-serif;
 }

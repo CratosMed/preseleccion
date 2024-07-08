@@ -9,8 +9,6 @@
         </div>
         <br />
         <br />
-
-
         <DataTable :data="participantes" :columns="columns" class="table table-striped table-bordered display"
             ref="table" :options="{
         responsive: true, autoWidth: false, dom: dom, select: true, language: {
