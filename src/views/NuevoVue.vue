@@ -1,120 +1,130 @@
 <template>
   <div :class='contentClass'>
     <section>
-      <div class="position-relative ">
+      <div class="position-relative container ">
         <br>
         <br>
         <strong>
-          <h3 class="fuente font-weight-bold">Participante: {{ form.nombre }} {{ form.apellido }}</h3>
+          <h3 class="fuente font-weight-bold ">Nuevo Participante: {{ form.nombre }} {{ form.apellido }}</h3>
         </strong>
         <hr>
-        <div class="container alto">
-          <div class="row  container">
-            <div class="col-sm-12 col-md-6 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control " :disabled=this.form.editar name="cedula" id="cedula"
-                    v-model="form.cedula" placeholder="Cedula">
-                  <label for="cedula">Cédula:</label>
+        <div class="form-container">
+          <div class="row ">
+            <div class="col-1"></div> <!-- Columna col-1 a la izquierda -->
+            <div class="col-10">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 ">
+                  <div class="form-group left">
+                    <div class="form-floating ">
+                      <input type="text" class="form-control " :disabled=this.form.editar name="cedula" id="cedula"
+                        v-model="form.cedula" placeholder="Cedula">
+                      <label for="cedula">Cédula:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 ">
+                  <div class="form-group left">
+                    <div class="form-floating ">
+                      <input type="text" class="form-control" name="nombre" :disabled=this.form.editar id="nombre"
+                        v-model="form.nombre" placeholder="Nombre">
+                      <label for="nombre">Nombre:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 ">
+                  <div class="form-group left">
+                    <div class="form-floating ">
+                      <input type="text" class="form-control" :disabled=this.form.editar name="apellido" id="apellido"
+                        v-model="form.apellido" placeholder="Apellido">
+                      <label for="apellido">Apellido:</label>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control" name="nombre" :disabled=this.form.editar id="nombre"
-                    v-model="form.nombre" placeholder="Nombre">
-                  <label for="nombre">Nombre:</label>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                  <div class="form-group left">
+                    <div class="form-floating ">
+                      <input type="date" class="form-control truncate-md" :disabled=this.form.editar
+                        name="fecha_nacimiento" id="fecha_nacimiento" v-model="form.fecha_nacimiento"
+                        placeholder="fecha de Nacimiento">
+                      <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                  <div class="form-group left">
+                    <div class="form-floating ">
+                      <input type="text" class="form-control" :disabled=this.form.editar name="telefono" id="telefono"
+                        v-model="form.telefono" placeholder="Telefono">
+                      <label for="telefono">Teléfono:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 ">
+                  <div class="form-group left">
+                    <div class="form-floating">
+                      <select class="form-control" :disabled="form.editar" name="carrera" id="carrera"
+                        v-model="form.carrera">
+                        <option value="Educación Inicial">Administración Mención RRHH</option>
+                        <option value="Educación Integral">Administración Mención RMF</option>
+                        <option value="Administración de Recursos Humanos">Administración Mención
+                          Informatica</option>
+                        <option value="Administración de Informática y Recursos Humanos">Administración
+                          Mención Mercadeo </option>
+                        <option value="Educación Inicial">Educación Integra</option>
+                        <option value="Educación Inicial">Educación Inicial</option>
+                      </select>
+                      <label for="carrera">Carrera:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                    <div class="form-group left">
+                      <div class="form-floating ">
+                        <input type="text" class="form-control truncate-md" :disabled=this.form.editar
+                          name="u_c_acumuladas" id="u_c_acumuladas" v-model="form.u_c_acumuladas" placeholder="U/C">
+                        <label for="u_c_acumuladas">Unidad de crédito acumulada:</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                    <div class="form-group left">
+                      <div class="form-floating">
+                        <select class="form-control" :disabled="form.editar" name="sexo" id="sexo" v-model="form.sexo">
+                          <option value="Femenino">Femenino</option>
+                          <option value="Masculino">Masculino</option>
+                        </select>
+                        <label for="sexo">Género:</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                    <div class="form-group left">
+                      <div class="form-floating ">
+                        <input type="text" class="form-control" :disabled=this.form.editar name="correo" id="correo"
+                          v-model="form.correo" placeholder="Correo">
+                        <label for="correo">Correo:</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-xl-12 ">
+                    <div class="form-group left">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" :disabled=this.form.editar name="direccion"
+                          id="direccion" v-model="form.direccion" placeholder="Direccion">
+                        <label for="direccion">Dirección:</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
-            <div class="col-sm-12 col-md-12 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control" :disabled=this.form.editar name="apellido" id="apellido"
-                    v-model="form.apellido" placeholder="Apellido">
-                  <label for="apellido">Apellido:</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row container">
-            <div class="col-sm-12 col-md-6 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="date" class="form-control" :disabled=this.form.editar name="fecha_nacimiento"
-                    id="fecha_nacimiento" v-model="form.fecha_nacimiento" placeholder="fecha de Nacimiento">
-                  <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control" :disabled=this.form.editar name="telefono" id="telefono"
-                    v-model="form.telefono" placeholder="Telefono">
-                  <label for="telefono">Teléfono:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating">
-                  <select class="form-control" :disabled="form.editar" name="carrera" id="carrera"
-                    v-model="form.carrera">
-                    <option value="Educación Inicial">Administración Mención RRHH</option>
-                    <option value="Educación Integral">Administración Mención RMF</option>
-                    <option value="Administración de Recursos Humanos">Administración Mención
-                      Informatica</option>
-                    <option value="Administración de Informática y Recursos Humanos">Administración
-                      Mención Mercadeo </option>
-                    <option value="Educación Inicial">Educación Integra</option>
-                    <option value="Educación Inicial">Educación Inicial</option>
-                  </select>
-                  <label for="carrera">Carrera:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-xl-12">
-              <div class="form-group left">
-                <div class="form-floating">
-                  <input type="text" class="form-control" :disabled=this.form.editar name="direccion" id="direccion"
-                    v-model="form.direccion" placeholder="Direccion">
-                  <label for="direccion">Dirección:</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row container">
-            <div class="col-sm-12 col-md-6 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control" :disabled=this.form.editar name="u_c_acumuladas"
-                    id="u_c_acumuladas" v-model="form.u_c_acumuladas" placeholder="U/C">
-                  <label for="u_c_acumuladas">Unidad de crédito acumulada:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating">
-                  <select class="form-control" :disabled="form.editar" name="sexo" id="sexo" v-model="form.sexo">
-                    <option value="Femenino">Femenino</option>
-                    <option value="Masculino">Masculino</option>
-                  </select>
-                  <label for="sexo">Género:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-xl-4">
-              <div class="form-group left">
-                <div class="form-floating ">
-                  <input type="text" class="form-control" :disabled=this.form.editar name="correo" id="correo"
-                    v-model="form.correo" placeholder="Correo">
-                  <label for="correo">Correo:</label>
-                </div>
-              </div>
-            </div>
+            <div class="col-1"></div>
           </div>
           <div class="form-group">
             <br />
@@ -122,7 +132,6 @@
               Guardar
               <Icon icon="bx:user-plus" width="18" height="18" />
             </button>
-
             <button class="btn btn-danger izquierda2" v-on:click="eliminar()"> Eliminar
               <Icon icon="bx:user-plus" width="18" height="18" />
             </button>
@@ -347,6 +356,32 @@ export default {
 }
 
 .position-relative {
-  height: 1024px;
+  min-height: 100vh;
+}
+
+.form-container {
+  padding-bottom: 50px;
+  /* Margen inferior para evitar superposición con el footer */
+}
+
+.form-group {
+  margin-bottom: 0px;
+  /* Reducir el margen inferior entre los campos del formulario */
+}
+
+@media (max-width: 768px) {
+  .truncate-md {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 768px) {
+  .truncate-md {
+    max-width: 90%;
+  }
 }
 </style>
